@@ -1,0 +1,37 @@
+// 피보나치 수열의 n번째 항을 구하는 알고리즘 구현 (재귀 , 반복)
+// 피보나치 수열에서 n번째 수를 구하시오.
+// fib함수는 n번째 항을 구하기 위해 2^(n/2)개의 항 이상을 계산해야 한다.
+// fib2함수는 n번째 항을 구하기 위해 n+1개의 항을 계산한다.
+int fib(int n)		//재귀
+{
+	if (n == 1)
+		return 0;
+	else if (n == 2)
+		return 1;
+	else // n > 2
+		return fib(n - 1) + fib(n - 2);
+}
+
+int fib2(int n)		//반복
+{
+	int ret = 0;
+	int i = 0;
+	int *f = NULL;
+
+	f = (int *)malloc(sizeof(int) * n);
+	if (f == NULL) {
+		printf("오류, 메모리 할당 실패 fibIterative()\n");
+		return 0;
+	}
+
+	f[0] = 0;
+	if (n > 0) {
+		f[1] = 1;
+		for (i = 2; i <= n-1; i++)
+			f[i] = f[i - 1] + f[i - 2];
+	}
+	ret = f[n-1];
+	free(f);
+
+	return ret;
+}
