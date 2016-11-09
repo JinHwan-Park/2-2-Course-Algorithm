@@ -1,0 +1,36 @@
+// 이분검색 알고리즘 구현
+// 원소가 n개인 정렬된 배열 S에서 원소 x를 찾으시오
+// 배열 value는 오름차순으로 정렬되어 있다고 가정
+// 이분검색에 의한 비교 횟수는 1+lg(n) 이다.
+int binsearch(int n, const int* value, int x)
+{
+	int low = 0, high = n - 1, mid = 0;
+	int i = 0;
+
+	while (low <= high && i == 0) {
+		mid = (low + high) / 2;
+		if (x == value[mid]) i = mid;
+		else if (x < value[mid]) high = mid - 1;
+		else // x > value
+			low = mid + 1;
+	}
+
+	return i;
+}
+
+
+// 순차검색 알고리즘 구현
+// 원소가 n개인 배열 S에 원소 x가 있는가?
+// n : 배열 원소의 갯수 // value : 배열 S // x : 찾고자 하는 원소의 값
+// 순차검색은 최악의 경우 n번 비교를 해야한다.
+int seqsearch(int n, const int* value, int x)
+{
+	int i = 0;
+
+	while (i <= n && value[i] != x) {
+		i++;
+	}
+	if (i > n - 1) i = 0;
+
+	return i;
+}
