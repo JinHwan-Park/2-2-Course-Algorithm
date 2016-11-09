@@ -1,0 +1,36 @@
+// 빠른정렬 알고리즘 구현
+// 오름차순으로 원소가 n개인 배열을 정렬
+// 빠른정렬의 시간복잡도는 최악의 경우 W(n) = n(n-1)/2 이고 평균적으로 A(n)는 약 1.38(n+1)lgn 이다.
+void quicksort(int low, int high, int *array)
+{
+	int pivotpoint = low;
+
+	if (high > low) {
+		partition(low, high, pivotpoint, array);
+		quicksort(low, pivotpoint - 1, array);
+		quicksort(pivotpoint + 1, high, array);
+	}
+}
+
+void partition(int low, int high, int pivotpoint, int *array)
+{
+	int i, j;
+	int pivotitem;
+	int temp;
+
+	pivotitem = array[low];
+	j = low;
+	for (i = low + 1; i <= high; i++) {
+		if (array[i] < pivotitem) {
+			j++;
+			temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+		}
+	}
+	
+	pivotpoint = j;
+	temp = array[low];
+	array[low] = array[pivotpoint];
+	array[pivotpoint] = temp;
+}
